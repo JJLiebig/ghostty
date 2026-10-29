@@ -1260,8 +1260,7 @@ typedef enum GHOSTTY_ENUM_TYPED {
  * you want to keep.
  *
  * This is a sized struct. Later versions may add fields at the end, and
- * `size` tells you which fields are present. Every field below has been
- * present since this struct was introduced.
+ * `size` tells you which fields are present.
  *
  * @ingroup terminal
  */
@@ -1311,6 +1310,11 @@ typedef struct {
    * waiting for, or has finished. You may shorten it to fit, but don't
    * try to read meaning into it. */
   GhosttyString message;
+
+  /** The complete validated report body after `7501;`, excluding the
+   * terminator. Preserves unknown keys and encoded text as received.
+   * Only valid during the callback; copy it to retain it. */
+  GhosttyString raw;
 } GhosttyTerminalProgramStatus;
 
 /**
